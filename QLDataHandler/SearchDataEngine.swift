@@ -3,7 +3,7 @@
 //  QLDataHandler
 //
 //  Created by Quentin Liardeaux on 2/9/19.
-//  Copyright © 2019 Quentin Liardeaux. All rights reserved.
+//  Copyright © 2019 Quentin Liardeaux. All rights reserved
 //
 
 import Foundation;
