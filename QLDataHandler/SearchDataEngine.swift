@@ -19,7 +19,7 @@ public protocol DataRecordConformity {
     init(json: [String: Any]);
 }
 
-public class SearchDataEngine<Record: DataRecordConformity>
+open class SearchDataEngine<Record: DataRecordConformity>
 {
     public var records = [Record]();
     public var loadedPages: UInt = 0;
@@ -29,7 +29,7 @@ public class SearchDataEngine<Record: DataRecordConformity>
     private var currentIndex: Index;
     private var isFetchingData: Bool = false;
     private var disposeBag = DisposeBag();
-    public weak var delegate: SearchDataEngineDelegate? {
+    open weak var delegate: SearchDataEngineDelegate? {
         didSet {
             startSearching();
         }
@@ -41,7 +41,7 @@ public class SearchDataEngine<Record: DataRecordConformity>
         self.currentIndex = index;
     }
     
-    private func startSearching()
+    open func startSearching()
     {
         self.currentIndex.search(self.currentQuery) { [weak self] (data, error) in
             guard let self = self,
@@ -66,7 +66,7 @@ public class SearchDataEngine<Record: DataRecordConformity>
         }
     }
     
-    public func loadMore()
+    open func loadMore()
     {
         if (self.loadedPages + 1 >= self.nbPages)
             || (self.isFetchingData == true) {

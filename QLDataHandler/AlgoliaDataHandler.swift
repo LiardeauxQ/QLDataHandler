@@ -17,7 +17,7 @@ public protocol AlgoliaSerializable {
     func createAlgoliaObject<T>(previousValue: T?, additionalInfo: [String: Any]?) -> [String: Any]?;
 }
 
-public class AlgoliaDataHandler: ReactiveSwiftEventHandler
+open class AlgoliaDataHandler: ReactiveSwiftEventHandler
 {
     private var _client: Client;
     public var client: Client {
@@ -33,7 +33,7 @@ public class AlgoliaDataHandler: ReactiveSwiftEventHandler
         self.index = self._client.index(withName: indexName);
     }
     
-    public func push(object: [String: Any]) -> Completable
+    open func push(object: [String: Any]) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             self.index.addObject(object) { [weak self] (data, error) in
@@ -43,7 +43,7 @@ public class AlgoliaDataHandler: ReactiveSwiftEventHandler
         });
     }
     
-    public func update(object: [String: Any]) -> Completable?
+    open func update(object: [String: Any]) -> Completable?
     {
         guard let id = object["objectID"] as? String else {
             return nil;
@@ -59,7 +59,7 @@ public class AlgoliaDataHandler: ReactiveSwiftEventHandler
         });
     }
     
-    public func update(objects: [[String: Any]]) -> Completable?
+    open func update(objects: [[String: Any]]) -> Completable?
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             self.index.partialUpdateObjects(
@@ -72,7 +72,7 @@ public class AlgoliaDataHandler: ReactiveSwiftEventHandler
         });
     }
     
-    public func delete(ids: [String]) -> Completable
+    open func delete(ids: [String]) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             self.index.deleteObjects(withIDs: ids) { [weak self] (data, error) in
@@ -82,7 +82,7 @@ public class AlgoliaDataHandler: ReactiveSwiftEventHandler
         });
     }
     
-    public func delete(id: String) -> Completable
+    open func delete(id: String) -> Completable
     {
         return self.delete(ids: [id]);
     }

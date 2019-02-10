@@ -23,7 +23,7 @@ public protocol ReactiveSwiftEventHandler {
 
 public extension ReactiveSwiftEventHandler
 {
-    public func handleCompletableEvent(_ event: ((CompletableEvent) -> Void),
+    open func handleCompletableEvent(_ event: ((CompletableEvent) -> Void),
                                        _ error: Error?)
     {
         if let error = error {
@@ -33,7 +33,7 @@ public extension ReactiveSwiftEventHandler
         event(.completed);
     }
     
-    public func handleSingleEvent<T>(_ event: ((SingleEvent<T>) -> Void),
+    open func handleSingleEvent<T>(_ event: ((SingleEvent<T>) -> Void),
                                      _ value: T?,
                                      _ error: Error?)
     {
@@ -48,7 +48,7 @@ public extension ReactiveSwiftEventHandler
         }
     }
     
-    public func convertObservableEventToCompletableEvent<T>(observableEvent: Event<T>,
+    open func convertObservableEventToCompletableEvent<T>(observableEvent: Event<T>,
                                                             completableEvent: ((CompletableEvent) -> Void))
     {
         switch observableEvent {
@@ -61,7 +61,7 @@ public extension ReactiveSwiftEventHandler
         }
     }
     
-    public func convertObservableEventToSingleEvent<T>(observableEvent: Event<T>,
+    open func convertObservableEventToSingleEvent<T>(observableEvent: Event<T>,
                                                        singleEvent: ((SingleEvent<T>) -> Void))
     {
         switch observableEvent {
