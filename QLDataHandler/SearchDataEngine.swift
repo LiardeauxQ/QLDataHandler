@@ -7,10 +7,9 @@
 //
 
 import Foundation;
-import Foundation
 import RxSwift;
 import RxCocoa;
-import AlgoliaSearch;
+import InstantSearchClient;
 
 public protocol SearchDataEngineDelegate: class {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?);
@@ -36,7 +35,7 @@ public class SearchDataEngine<Record: DataRecordConformity>
         }
     };
     
-    public init(index: Index, query: AlgoliaSearch.Query)
+    public init(index: Index, query: InstantSearchClient.Query)
     {
         self.currentQuery = query;
         self.currentIndex = index;
@@ -79,7 +78,7 @@ public class SearchDataEngine<Record: DataRecordConformity>
         searchMoreData(with: self.currentIndex, and: query);
     }
     
-    private func searchMoreData(with index: Index, and query: AlgoliaSearch.Query)
+    private func searchMoreData(with index: Index, and query: InstantSearchClient.Query)
     {
         self.isFetchingData = true;
         index.search(query) { [weak self] (data, error) in

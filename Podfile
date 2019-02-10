@@ -14,7 +14,6 @@ target 'QLDataHandler' do
     pod 'Firebase/Storage'
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
-    pod 'AlgoliaSearch-Client-Swift'
     pod 'Geofirestore'
     pod 'InstantSearchClient', '~> 6.0'
 
