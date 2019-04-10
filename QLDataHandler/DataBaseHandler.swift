@@ -41,7 +41,7 @@ public protocol DataBaseHandler: ReactiveSwiftEventHandler
 
 public extension DataBaseHandler
 {
-    public func fetchDocument<T: DocumentSerializable>(document: DocumentReference,
+    func fetchDocument<T: DocumentSerializable>(document: DocumentReference,
                                                 completionHandler: @escaping ((T?, Error?) -> Void))
     {
         var object: T?;
@@ -54,7 +54,7 @@ public extension DataBaseHandler
         }
     }
     
-    public func fetchCollection<T: DocumentSerializable>(collection: CollectionReference,
+    func fetchCollection<T: DocumentSerializable>(collection: CollectionReference,
                                                   completionHandler: @escaping (([T]?, Error?) -> Void))
     {
         var objects: [T]?;
@@ -67,7 +67,7 @@ public extension DataBaseHandler
         }
     }
     
-    public func fetchCollection<T: DocumentSerializable>(query: Query,
+    func fetchCollection<T: DocumentSerializable>(query: Query,
                                                   completionHandler: @escaping (([T]?, Error?) -> Void))
     {
         var objects: [T]?;
@@ -80,7 +80,7 @@ public extension DataBaseHandler
         }
     }
     
-    public func setListener<T: DocumentSerializable>(with query: Query,
+    func setListener<T: DocumentSerializable>(with query: Query,
                                               completionHandler: @escaping (([T]?, Error?) -> Void)) -> ListenerRegistration
     {
         var objects: [T]?;
@@ -93,7 +93,7 @@ public extension DataBaseHandler
         });
     }
     
-    public func stockObjects<T: DocumentSerializable>(with querySnapshot: QuerySnapshot) -> [T]
+    func stockObjects<T: DocumentSerializable>(with querySnapshot: QuerySnapshot) -> [T]
     {
         var objects = [T]();
         
@@ -106,12 +106,12 @@ public extension DataBaseHandler
         return (objects);
     }
     
-    public func stock<T: DocumentSerializable>(document: DocumentSnapshot) -> T?
+    func stock<T: DocumentSerializable>(document: DocumentSnapshot) -> T?
     {
         return (T(id: document.documentID, dictionary: document.data()));
     }
     
-    public func update<T: DocumentSerializable>(object: T, document: DocumentReference) -> Completable?
+    func update<T: DocumentSerializable>(object: T, document: DocumentReference) -> Completable?
     {
         guard let data = object.dictionary else {
             return nil;
@@ -120,7 +120,7 @@ public extension DataBaseHandler
         return update(data: data, document: document);
     }
     
-    public func update(data: [String: Any], document: DocumentReference) -> Completable
+    func update(data: [String: Any], document: DocumentReference) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             document.updateData(data) { (error) in
@@ -130,7 +130,7 @@ public extension DataBaseHandler
         });
     }
     
-    public func update(location: CLLocation, geoFirestore: GeoFirestore, documentID: String) -> Completable
+    func update(location: CLLocation, geoFirestore: GeoFirestore, documentID: String) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             geoFirestore.setLocation(location: location,
@@ -141,7 +141,7 @@ public extension DataBaseHandler
         });
     }
     
-    public func set<T: DocumentSerializable>(object: T, document: DocumentReference) -> Completable?
+    func set<T: DocumentSerializable>(object: T, document: DocumentReference) -> Completable?
     {
         guard let data = object.dictionary else {
             return nil;
@@ -150,7 +150,7 @@ public extension DataBaseHandler
         return set(data: data, document: document);
     }
     
-    public func set(data: [String: Any], document: DocumentReference) -> Completable
+    func set(data: [String: Any], document: DocumentReference) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             document.setData(data) { (error) in
@@ -160,7 +160,7 @@ public extension DataBaseHandler
         });
     }
     
-    public func remove(document: DocumentReference) -> Completable
+    func remove(document: DocumentReference) -> Completable
     {
         return Completable.create(subscribe: { (event) -> Disposable in
             document.delete { (error) in
