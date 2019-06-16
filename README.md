@@ -43,3 +43,7 @@ RxCocoa
 Geofirestore
 InstantSearchClient
 ```
+## Licence
+
+MIT
+
