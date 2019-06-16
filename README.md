@@ -30,7 +30,7 @@ end
 ```
 pod install
 ```
-# Dependencies
+## Dependencies
 
 ```
 Firebase/Core
